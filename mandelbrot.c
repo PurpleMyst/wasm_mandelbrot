@@ -1,4 +1,3 @@
-/* TODO: Extend this to do more than two colors. */
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
@@ -12,6 +11,14 @@
 #define IMAG_START -1
 #define IMAG_END 1
 
+#define LOW_R 0x00
+#define LOW_G 0x00
+#define LOW_B 0x00
+
+#define HIGH_R 0xFF
+#define HIGH_G 0xFF
+#define HIGH_B 0xFF
+
 void draw_mandelbrot(const size_t width, const size_t height, uint8_t *rgba_pixels) {
     for (size_t y = 0; y < height; ++y) {
         for (size_t x = 0; x < width; ++x) {
@@ -24,17 +31,11 @@ void draw_mandelbrot(const size_t width, const size_t height, uint8_t *rgba_pixe
                     z = z * z + c, ++iterations)
                 ;
 
-            if (iterations == MAX_ITERATIONS) {
-                rgba_pixels[4 * (y * width + x) + 0] = 0xFF; // R
-                rgba_pixels[4 * (y * width + x) + 1] = 0xFF; // G
-                rgba_pixels[4 * (y * width + x) + 2] = 0xFF; // B
-                rgba_pixels[4 * (y * width + x) + 3] = 0xFF; // A
-            } else {
-                rgba_pixels[4 * (y * width + x) + 0] = 0x00; // R
-                rgba_pixels[4 * (y * width + x) + 1] = 0x00; // G
-                rgba_pixels[4 * (y * width + x) + 2] = 0x00; // B
-                rgba_pixels[4 * (y * width + x) + 3] = 0xFF; // A
-            }
+            double fraction = ((double)iterations) / MAX_ITERATIONS;
+            rgba_pixels[4 * (y * width + x) + 0] = (HIGH_R - LOW_R) * fraction + LOW_R; // R
+            rgba_pixels[4 * (y * width + x) + 1] = (HIGH_G - LOW_G) * fraction + LOW_G; // G
+            rgba_pixels[4 * (y * width + x) + 2] = (HIGH_B - LOW_B) * fraction + LOW_B; // B
+            rgba_pixels[4 * (y * width + x) + 3] = 0xFF; // A
         }
     }
 }

@@ -36,5 +36,4 @@ Module.onRuntimeInitialized = function() {
     }
 
     draw();
-    window.addEventListener("resize", draw);
 };
