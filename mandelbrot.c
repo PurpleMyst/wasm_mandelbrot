@@ -11,13 +11,13 @@
 #define IMAG_START -1
 #define IMAG_END 1
 
-#define LOW_R 0x00
-#define LOW_G 0x00
-#define LOW_B 0x00
+#define LOW_R 0xE1
+#define LOW_G 0xE1
+#define LOW_B 0xE1
 
-#define HIGH_R 0xFF
-#define HIGH_G 0xFF
-#define HIGH_B 0xFF
+#define HIGH_R 0x00
+#define HIGH_G 0x00
+#define HIGH_B 0x00
 
 void draw_mandelbrot(const size_t width, const size_t height, uint8_t *rgba_pixels) {
     for (size_t y = 0; y < height; ++y) {
